@@ -157,7 +157,7 @@ def walk_through(directory):
   # Save the figure to the current working directory
   if savefig:
     fig.savefig("confusion_matrix.png")
----------------------------------------------------
+
 import datetime
 
 def create_tensorboard_callback(dir_name, experiment_name):
