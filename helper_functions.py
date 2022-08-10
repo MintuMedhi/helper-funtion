@@ -106,7 +106,7 @@ def walk_through(directory):
   '''Walk through the 'dirname', "filenames" and 'directory path'''
   import os
   for dirpath,dirname, filename in os.walk(directory):
-    print(f"There are {len(dirnames)} directories and {len(filepath)} images in '{dirpath}'.")
+    print(f"There are {len(dirname)} directories and {len(filepath)} images in '{dirpath}'.")
     
     
   # Create the confustion matrix
