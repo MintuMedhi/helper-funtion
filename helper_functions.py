@@ -108,7 +108,36 @@ def walk_through(directory):
   for dirpath,dirname, filename in os.walk(directory):
     print(f"There are {len(dirname)} directories and {len(filename)} images in '{dirpath}'.")
     
-    
+ # Note: The following confusion matrix code is a remix of Scikit-Learn's 
+# plot_confusion_matrix function - https://scikit-learn.org/stable/modules/generated/sklearn.metrics.plot_confusion_matrix.html
+import itertools
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.metrics import confusion_matrix
+
+# Our function needs a different name to sklearn's plot_confusion_matrix
+def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_size=15, norm=False, savefig=False): 
+  """Makes a labelled confusion matrix comparing predictions and ground truth labels.
+  If classes is passed, confusion matrix will be labelled, if not, integer class values
+  will be used.
+  Args:
+    y_true: Array of truth labels (must be same shape as y_pred).
+    y_pred: Array of predicted labels (must be same shape as y_true).
+    classes: Array of class labels (e.g. string form). If `None`, integer labels are used.
+    figsize: Size of output figure (default=(10, 10)).
+    text_size: Size of output figure text (default=15).
+    norm: normalize values or not (default=False).
+    savefig: save confusion matrix to file (default=False).
+  
+  Returns:
+    A labelled confusion matrix plot comparing y_true and y_pred.
+  Example usage:
+    make_confusion_matrix(y_true=test_labels, # ground truth test labels
+                          y_pred=y_preds, # predicted labels
+                          classes=class_names, # array of class label names
+                          figsize=(15, 15),
+                          text_size=10)
+  """  
   # Create the confustion matrix
   cm = confusion_matrix(y_true, y_pred)
   cm_norm = cm.astype("float") / cm.sum(axis=1)[:, np.newaxis] # normalize it
@@ -157,6 +186,8 @@ def walk_through(directory):
   # Save the figure to the current working directory
   if savefig:
     fig.savefig("confusion_matrix.png")
+  
+# Make a function to predict on images and plot them (works with multi-class)
 
 import datetime
 
