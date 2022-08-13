@@ -318,11 +318,12 @@ def calculate_results(y_true, y_pred):
   return model_results
 
 #View Original and Augmented image
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import os
-import random
+
 def view_original_augmented_image(filename,filepath,augmented_layer):
+    import matplotlib.pyplot as plt
+    import matplotlib.image as mpimg
+    import os
+    import random
   '''It plots both the original and augmented image
     filename=Train_data filename
     filepath=Train_data stored filepath
