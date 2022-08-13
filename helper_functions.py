@@ -316,3 +316,31 @@ def calculate_results(y_true, y_pred):
                   "recall": model_recall,
                   "f1": model_f1}
   return model_results
+
+#View Original and Augmented image
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import os
+import random
+def view_original_augmented_image(filename,filepath,augmented_layer):
+  '''It plots both the original and augmented image
+    filename=Train_data filename
+    filepath=Train_data stored filepath
+    augmented_layer=layer created through Sequential layer for augmentation'''
+  
+  #Orginal Image
+  target_class=random.choice(filename.class_names)# choose a random class
+  target_dir=filepath+'/'+target_class # create the target directory
+  random_image=random.choice(os.listdir(target_dir)) # choose a random image from target directory
+  random_image_path=target_dir+'/'+random_image  # create the choosen random image path
+  img=mpimg.imread(random_image_path)# read in the chosen target image
+  plt.imshow(img)# plot the target image
+  plt.title(f"Original random image from class: {target_class}")
+  plt.axis(False)# turn off the axes
+  
+  #Augmented Image
+  augmented_image=augmented_layer(tf.expand_dims(img,axis=0))# data augmentation model requires shape (None, height, width, 3)
+  plt.figure()
+  plt.imshow(tf.squeeze(augmented_image)/255.)# requires normalization after augmentation
+  plt.title(f"Augmented random image from class: {target_class}")
+  plt.axis(False);
